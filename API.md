@@ -49,7 +49,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `201` | `application/json` | <pre lang="json"><br />{<br />  "id": 1,<br />  "name": "Thai School",<br />  "alias": "TS",<br />  "address": "Bangkok, Thailand",<br />  "classrooms_count": 0,<br />  "students_count": 0,<br />  "teachers_count": 0<br />}</pre> |
+> | `201` | `application/json` | <pre lang="json"><br />{<br />  "id": 1,<br />  "name": "Thai School",<br />  "alias": "TS",<br />  "address": "Bangkok, Thailand"<br />}</pre> |
 > | `400` | `application/json` | `Bad Request` |
 
 </details>
@@ -79,7 +79,7 @@
 ### Update school
 
 <details>
- <summary><code>PUT</code> <code>PATCH</code> <code><b>/api/v1/schools/{id}</b></code></summary>
+ <summary><code>PATCH</code> <code><b>/api/v1/schools/{id}</b></code></summary>
 
 #### Query string
 
@@ -89,15 +89,15 @@
 
 > | name | type | data type | description |
 > |------|------|-----------|-------------|
-> | name   | required(PUT)/optional(PATCH) | string | Name of the school  |
-> | alias   | required(PUT)/optional(PATCH) | string | Alias of the school  |
-> | address   | required(PUT)/optional(PATCH) | char | Address of the school
+> | name   | optional | string | Name of the school  |
+> | alias   | optional | string | Alias of the school  |
+> | address   | optional | char | Address of the school
 
 #### Responses
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json"><br />{<br />  "id": 1,<br />  "name": "Thai School",<br />  "alias": "TS",<br />  "address": "Bangkok, Thailand",<br />  "classrooms_count": 0,<br />  "students_count": 0,<br />  "teachers_count": 0<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json"><br />{<br />  "name": "Thai School",<br />  "alias": "TS",<br />  "address": "Bangkok, Thailand",<br />}</pre> |
 > | `404` | `application/json` | `Not Found` |
 > | `400` | `application/json` | `Bad Request` |
 
@@ -147,7 +147,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">[<br />  {<br />    "id": 2,<br />    "grade": 4,<br />    "room": 1,<br />    "school_detail": {<br />      "id": 1,<br />      "name": "Thai School",<br />      "alias": "TS",<br />      "address": "Bangkok, Thailand"<br />    },<br />    "teachers": [<br />      {<br />        "id": 6,<br />        "first_name": "Saranyu",<br />        "last_name": "Chansiri",<br />        "gender": "M"<br />      }<br />    ],<br />    "students": [<br />      {<br />        "id": 5,<br />        "first_name": "Chongrak",<br />        "last_name": "Kaewmanee",<br />        "gender": "M"<br />      },<br />      {<br />        "id": 10,<br />        "first_name": "Kitsakorn",<br />        "last_name": "Thawan",<br />        "gender": "M"<br />      }<br />    ]<br />  },<br />  ...<br />]</pre> |
+> | `200` | `application/json` | <pre lang="json">[<br />  {<br />    "id": 2,<br />    "grade": 4,<br />    "room": 1,<br />    "school": {<br />      "id": 1,<br />      "name": "Thai School",<br />      "alias": "TS",<br />      "address": "Bangkok, Thailand"<br />    },<br />    "teachers": [<br />      {<br />        "id": 6,<br />        "first_name": "Saranyu",<br />        "last_name": "Chansiri",<br />        "gender": "M"<br />      }<br />    ],<br />    "students": [<br />      {<br />        "id": 5,<br />        "first_name": "Chongrak",<br />        "last_name": "Kaewmanee",<br />        "gender": "M"<br />      },<br />      {<br />        "id": 10,<br />        "first_name": "Kitsakorn",<br />        "last_name": "Thawan",<br />        "gender": "M"<br />      }<br />    ]<br />  },<br />  ...<br />]</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -173,7 +173,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `201` | `application/json` | <pre lang="json">{<br />  "id": 2,<br />  "grade": 4,<br />  "room": 1,<br />  "school_detail": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "teachers": [],<br />  "students": []<br />}</pre> |
+> | `201` | `application/json` | <pre lang="json">{<br />  "id": 2,<br />  "grade": 4,<br />  "room": 1,<br />  "school_id": 1<br />}</pre> |
 > | `400` | `application/json` | `Bad Request` |
 
 </details>
@@ -195,7 +195,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">{<br />  "id": 2,<br />  "grade": 4,<br />  "room": 1,<br />  "school_detail": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "teachers": [<br />    {<br />      "id": 6,<br />      "first_name": "Saranyu",<br />      "last_name": "Chansiri",<br />      "gender": "M"<br />    }<br />  ],<br />  "students": [<br />    {<br />      "id": 5,<br />      "first_name": "Chongrak",<br />      "last_name": "Kaewmanee",<br />      "gender": "M"<br />    },<br />    {<br />      "id": 10,<br />      "first_name": "Kitsakorn",<br />      "last_name": "Thawan",<br />      "gender": "M"<br />    }<br />  ]<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json">{<br />  "id": 2,<br />  "grade": 4,<br />  "room": 1,<br />  "school": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "teachers": [<br />    {<br />      "id": 6,<br />      "first_name": "Saranyu",<br />      "last_name": "Chansiri",<br />      "gender": "M"<br />    }<br />  ],<br />  "students": [<br />    {<br />      "id": 5,<br />      "first_name": "Chongrak",<br />      "last_name": "Kaewmanee",<br />      "gender": "M"<br />    },<br />    {<br />      "id": 10,<br />      "first_name": "Kitsakorn",<br />      "last_name": "Thawan",<br />      "gender": "M"<br />    }<br />  ]<br />}</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -203,7 +203,7 @@
 ### Update classroom
 
 <details>
- <summary><code>PUT</code> <code>PATCH</code> <code><b>/api/v1/classrooms{id}</b></code></summary>
+ <summary><code>PATCH</code> <code><b>/api/v1/classrooms{id}</b></code></summary>
 
 #### Query string
 
@@ -213,15 +213,14 @@
 
 > | name | required | data type | description |
 > |------|------|-----------|-------------|
-> | grade   | required(PUT)/optional(PATCH) | number | Grade number of the classroom  |
-> | room   | required(PUT)/optional(PATCH) | number | Room number of the classroom  |
-> | school_id   | required(PUT) | char | School ID to register
+> | grade   | optional(PATCH) | number | Grade number of the classroom  |
+> | room   | optional(PATCH) | number | Room number of the classroom  |
 
 #### Responses
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">{<br />  "id": 2,<br />  "grade": 4,<br />  "room": 1,<br />  "school_detail": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "teachers": [],<br />  "students": []<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json">{<br />  "grade": 4,<br />  "room": 1<br />}</pre> |
 > | `400` | `application/json` | `Bad Request` |
 > | `404` | `application/json` | `Not Found` |
 
@@ -276,7 +275,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">[<br />  {<br />    "id": 6,<br />    "first_name": "Saranyu",<br />    "last_name": "Chansiri",<br />    "gender": "M",<br />    "school_detail": {<br />      "id": 1,<br />      "name": "Thai School",<br />      "alias": "TS",<br />      "address": "Bangkok, Thailand"<br />    },<br />    "classrooms": [<br />      {<br />        "id": 2,<br />        "grade": 4,<br />        "room": 1<br />      },<br />      {<br />        "id": 1,<br />        "grade": 5,<br />        "room": 2<br />      }<br />    ]<br />  },<br />  ...<br />]</pre> |
+> | `200` | `application/json` | <pre lang="json">[<br />  {<br />    "id": 6,<br />    "first_name": "Saranyu",<br />    "last_name": "Chansiri",<br />    "gender": "M",<br />    "school": {<br />      "id": 1,<br />      "name": "Thai School",<br />      "alias": "TS",<br />      "address": "Bangkok, Thailand"<br />    },<br />    "classrooms": [<br />      {<br />        "id": 2,<br />        "grade": 4,<br />        "room": 1<br />      },<br />      {<br />        "id": 1,<br />        "grade": 5,<br />        "room": 2<br />      }<br />    ]<br />  },<br />  ...<br />]</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -304,7 +303,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `201` | `application/json` | <pre lang="json">{<br />  "id": 6,<br />  "first_name": "Saranyu",<br />  "last_name": "Chansiri",<br />  "gender": "M",<br />  "school_detail": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "classrooms": [<br />    {<br />      "id": 2,<br />      "grade": 4,<br />      "room": 1<br />    },<br />    {<br />      "id": 1,<br />      "grade": 5,<br />      "room": 2<br />    }<br />  ]<br />}</pre> |
+> | `201` | `application/json` | <pre lang="json">{<br />  "id": 6,<br />  "first_name": "Saranyu",<br />  "last_name": "Chansiri",<br />  "gender": "M",<br />  "school_id": 1,<br />  "classrooms_id": [<br />    2,<br />    1,<br />  ]<br />}</pre> |
 > | `400` | `application/json` | `Bad Request` |
 
 </details>
@@ -326,7 +325,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">{<br />  "id": 6,<br />  "first_name": "Saranyu",<br />  "last_name": "Chansiri",<br />  "gender": "M",<br />  "school_detail": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "classrooms": [<br />    {<br />      "id": 2,<br />      "grade": 4,<br />      "room": 1<br />    },<br />    {<br />      "id": 1,<br />      "grade": 5,<br />      "room": 2<br />    }<br />  ]<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json">{<br />  "id": 6,<br />  "first_name": "Saranyu",<br />  "last_name": "Chansiri",<br />  "gender": "M",<br />  "school": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "classrooms": [<br />    {<br />      "id": 2,<br />      "grade": 4,<br />      "room": 1<br />    },<br />    {<br />      "id": 1,<br />      "grade": 5,<br />      "room": 2<br />    }<br />  ]<br />}</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -334,7 +333,7 @@
 ### Update teacher
 
 <details>
- <summary><code>PUT</code> <code>PATCH</code> <code><b>/api/v1/teachers/{id}</b></code></summary>
+ <summary><code>PATCH</code> <code><b>/api/v1/teachers/{id}</b></code></summary>
 
 #### Query string
 
@@ -344,17 +343,17 @@
 
 > | name | required | data type | description |
 > |------|------|-----------|-------------|
-> | first_name   | required(PUT)/optional(PATCH) | string | string of first name  |
-> | last_name   |  required(PUT)/optional(PATCH) | string | string of last name  |
-> | gender   |  required(PUT)/optional(PATCH) | char | char of gender (M/F/O) => (Male, Female, Other)  |
-> | school_id   |  required(PUT)/optional(PATCH) | number | School ID to register  |
-> | classrooms_id   |  required(PUT)/optional(PATCH) | number[] | Array of classroom id to register  |
+> | first_name   | optional(PATCH) | string | string of first name  |
+> | last_name   |  optional(PATCH) | string | string of last name  |
+> | gender   |  optional(PATCH) | char | char of gender (M/F/O) => (Male, Female, Other)  |
+> | school_id   |  optional(PATCH) | number | School ID to register  |
+> | classrooms_id   |  optional(PATCH) | number[] | Array of classroom id to register  |
 
 #### Responses
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">{<br />  "id": 6,<br />  "first_name": "Saranyu",<br />  "last_name": "Chansiri",<br />  "gender": "M",<br />  "school_detail": {<br />    "id": 1,<br />    "name": "Thai School",<br />    "alias": "TS",<br />    "address": "Bangkok, Thailand"<br />  },<br />  "classrooms": [<br />    {<br />      "id": 2,<br />      "grade": 4,<br />      "room": 1<br />    },<br />    {<br />      "id": 1,<br />      "grade": 5,<br />      "room": 2<br />    }<br />  ]<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json">{<br />  "first_name": "Saranyu",<br />  "last_name": "Chansiri",<br />  "gender": "M",<br />  "school_id": 1,<br />  "classrooms_id": [<br />    2,<br />    1<br />  ]<br />}</pre> |
 > | `400` | `application/json` | `Bad Request` |
 
 </details>
@@ -408,7 +407,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">[<br />  {<br />    "id": 20,<br />    "first_name": "Alexis",<br />    "last_name": "Baker",<br />    "gender": "M",<br />    "school_detail": {<br />      "id": 2,<br />      "name": "American School",<br />      "alias": "AS",<br />      "address": "New York, USA"<br />    },<br />    "classroom_detail": {<br />      "id": 10,<br />      "grade": 9,<br />      "room": 3<br />    }<br />  },<br />  ...<br />]</pre> |
+> | `200` | `application/json` | <pre lang="json">[<br />  {<br />    "id": 20,<br />    "first_name": "Alexis",<br />    "last_name": "Baker",<br />    "gender": "M",<br />    "school": {<br />      "id": 2,<br />      "name": "American School",<br />      "alias": "AS",<br />      "address": "New York, USA"<br />    },<br />    "classroom": {<br />      "id": 10,<br />      "grade": 9,<br />      "room": 3<br />    }<br />  },<br />  ...<br />]</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -435,7 +434,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `201` | `application/json` | <pre lang="json">{<br />  "id": 20,<br />  "first_name": "Alexis",<br />  "last_name": "Baker",<br />  "gender": "M",<br />  "school_detail": {<br />    "id": 2,<br />    "name": "American School",<br />    "alias": "AS",<br />    "address": "New York, USA"<br />  },<br />  "classroom_detail": {<br />    "id": 10,<br />    "grade": 9,<br />    "room": 3<br />  }<br />}</pre> |
+> | `201` | `application/json` | <pre lang="json">{<br />  "id": 20,<br />  "first_name": "Alexis",<br />  "last_name": "Baker",<br />  "gender": "M",<br />  "classroom_id": 10,<br />}</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -457,7 +456,7 @@
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">{<br />  "id": 20,<br />  "first_name": "Alexis",<br />  "last_name": "Baker",<br />  "gender": "M",<br />  "school_detail": {<br />    "id": 2,<br />    "name": "American School",<br />    "alias": "AS",<br />    "address": "New York, USA"<br />  },<br />  "classroom_detail": {<br />    "id": 10,<br />    "grade": 9,<br />    "room": 3<br />  }<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json">{<br />  "id": 20,<br />  "first_name": "Alexis",<br />  "last_name": "Baker",<br />  "gender": "M",<br />  "school": {<br />    "id": 2,<br />    "name": "American School",<br />    "alias": "AS",<br />    "address": "New York, USA"<br />  },<br />  "classroom": {<br />    "id": 10,<br />    "grade": 9,<br />    "room": 3<br />  }<br />}</pre> |
 > | `404` | `application/json` | `NotFound` |
 
 </details>
@@ -465,7 +464,7 @@
 ### Update student 
 
 <details>
- <summary><code>PUT</code> <code>PATCH</code> <code><b>/api/v1/students/{id}</b></code></summary>
+ <summary><code>PATCH</code> <code><b>/api/v1/students/{id}</b></code></summary>
 
 #### Query string
 
@@ -475,16 +474,16 @@
 
 > | name | required | data type | description |
 > |------|------|-----------|-------------|
-> | first_name   | required(PUT)/optional(PATCH) | string | string of first name  |
-> | last_name   | required(PUT)/optional(PATCH) | string | string of last name  |
-> | gender   | required(PUT)/optional(PATCH) | char | char of gender (M/F/O) => (Male, Female, Other)  |
-> | classroom_id   | required(PUT)/optional(PATCH) | number | Classroom id to register  |
+> | first_name   | optional(PATCH) | string | string of first name  |
+> | last_name   | optional(PATCH) | string | string of last name  |
+> | gender   | optional(PATCH) | char | char of gender (M/F/O) => (Male, Female, Other)  |
+> | classroom_id   | optional(PATCH) | number | Classroom id to register  |
 
 #### Responses
 
 > | http code | content-type | response |
 > |-----------|--------------|----------|
-> | `200` | `application/json` | <pre lang="json">{<br />  "id": 20,<br />  "first_name": "Alexis",<br />  "last_name": "Baker",<br />  "gender": "M",<br />  "school_detail": {<br />    "id": 2,<br />    "name": "American School",<br />    "alias": "AS",<br />    "address": "New York, USA"<br />  },<br />  "classroom_detail": {<br />    "id": 10,<br />    "grade": 9,<br />    "room": 3<br />  }<br />}</pre> |
+> | `200` | `application/json` | <pre lang="json">{<br />  "first_name": "Alexis",<br />  "last_name": "Baker",<br />  "gender": "M",<br />  "classroom": 10<br />}</pre> |
 > | `400` | `application/json` | `Bad Request` |
 > | `404` | `application/json` | `Not Found` |
 
