@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from rest_framework import serializers
-from apis.models import Classroom
+from apis.models import Classroom, School
 from .simple import (
     SimpleSchoolSerializer,
     SimpleStudentSerializer,
@@ -40,6 +40,11 @@ class CreateClassroomSerializer(serializers.ModelSerializer):
             "room",
             "school_id",
         ]
+
+    def validate_school_id(self, value):
+        if not School.objects.filter(pk=value).exists():
+            raise serializers.ValidationError("No school with the given ID was found.")
+        return value
 
     def create(self, validated_data):
         try:
