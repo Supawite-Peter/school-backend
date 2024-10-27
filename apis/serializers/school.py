@@ -36,6 +36,7 @@ class CreateUpdateSchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
         fields = [
+            "id",
             "name",
             "alias",
             "address",
