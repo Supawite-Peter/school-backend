@@ -26,4 +26,5 @@ class TeacherViewSet(ModelViewSet):
         return TeacherSerializer
 
     def get_serializer_context(self):
-        return {"teacher_id": self.kwargs["pk"]}
+        if self.request.method == "PATCH":
+            return {"teacher_id": self.kwargs["pk"]}
