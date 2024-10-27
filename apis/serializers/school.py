@@ -32,11 +32,21 @@ class SchoolSerializer(serializers.ModelSerializer):
         return school.teachers.count()
 
 
-class CreateUpdateSchoolSerializer(serializers.ModelSerializer):
+class CreateSchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
         fields = [
             "id",
+            "name",
+            "alias",
+            "address",
+        ]
+
+
+class UpdateSchoolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = [
             "name",
             "alias",
             "address",

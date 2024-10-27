@@ -2,7 +2,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet
 from ...models import School
 from ...filters import SchoolFilter
-from apis.serializers.school import SchoolSerializer, CreateUpdateSchoolSerializer
+from apis.serializers.school import (
+    SchoolSerializer,
+    CreateSchoolSerializer,
+    UpdateSchoolSerializer,
+)
 
 
 class SchoolViewSet(ModelViewSet):
@@ -15,6 +19,8 @@ class SchoolViewSet(ModelViewSet):
     filterset_class = SchoolFilter
 
     def get_serializer_class(self):
-        if self.request.method in ["POST", "PATCH"]:
-            return CreateUpdateSchoolSerializer
+        if self.request.method == "POST":
+            return CreateSchoolSerializer
+        elif self.request.method == "PATCH":
+            return UpdateSchoolSerializer
         return SchoolSerializer
