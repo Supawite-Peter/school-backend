@@ -55,7 +55,7 @@ class CreateTeacherSerializer(serializers.ModelSerializer):
             try:
                 created_teacher.classrooms.add(*classrooms)
             except ValidationError as e:
-                raise serializers.ValidationError({"classrooms_id": e})
+                raise serializers.ValidationError({"classrooms_id": list(e)})
             return created_teacher
 
 
@@ -98,6 +98,6 @@ class UpdateTeacherSerializer(CreateTeacherSerializer):
             try:
                 classrooms.set(classrooms_data)
             except ValidationError as e:
-                raise serializers.ValidationError({"classrooms_id": e})
+                raise serializers.ValidationError({"classrooms_id": list(e)})
 
             return instance
