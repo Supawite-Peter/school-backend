@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apis.models import Student
+from apis.models import Student, Classroom
 from .simple import SimpleSchoolSerializer, SimpleClassroomSerializer
 
 
@@ -33,6 +33,13 @@ class CreateStudentSerializer(StudentSerializer):
             "gender",
             "classroom_id",
         ]
+
+    def validate_classroom_id(self, value):
+        if not Classroom.objects.filter(pk=value).exists():
+            raise serializers.ValidationError(
+                "No classroom with the given ID was found."
+            )
+        return value
 
 
 class UpdateStudentSerializer(CreateStudentSerializer):
