@@ -83,13 +83,16 @@ class UpdateTeacherSerializer(CreateTeacherSerializer):
 
     def update(self, instance, validated_data):
         with transaction.atomic():
+            print(validated_data.get("school_id", instance.school))
             # Get classroom
             classrooms_data = validated_data.pop("classrooms")
             classrooms = instance.classrooms
-            # Save first_name, last_name, gender first
+            # Save first_name, last_name, gender, school first
             instance.first_name = validated_data.get("first_name", instance.first_name)
             instance.last_name = validated_data.get("last_name", instance.last_name)
             instance.gender = validated_data.get("gender", instance.gender)
+            school_id = validated_data.get("school_id", instance.school)
+            instance.school = School.objects.get(pk=school_id)
             instance.save()
             # Then update classrooms
             try:
