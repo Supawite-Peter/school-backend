@@ -24,9 +24,7 @@ class TeacherSerializer(serializers.ModelSerializer):
 class CreateTeacherSerializer(serializers.ModelSerializer):
     school_id = serializers.ModelField(model_field=Teacher._meta.get_field("school"))
     classrooms_id = serializers.PrimaryKeyRelatedField(
-        source="classrooms",
-        queryset=Classroom.objects.all(),
-        many=True,
+        source="classrooms", queryset=Classroom.objects.all(), many=True
     )
 
     class Meta:
@@ -44,6 +42,22 @@ class CreateTeacherSerializer(serializers.ModelSerializer):
         if not School.objects.filter(pk=value).exists():
             raise serializers.ValidationError("No school with the given ID was found.")
         return value
+
+    def validate(self, attrs):
+        if "classrooms" in attrs:
+            school_classrooms = list(
+                School.objects.get(pk=attrs["school_id"]).classrooms.all()
+            )
+            for classroom_id in attrs["classrooms"]:
+                if classroom_id not in school_classrooms:
+                    raise serializers.ValidationError(
+                        {
+                            "classrooms_id": [
+                                "The school of the classroom must be the same as the school of the teacher."
+                            ],
+                        }
+                    )
+        return super().validate(attrs)
 
     def create(self, validated_data):
         with transaction.atomic():
