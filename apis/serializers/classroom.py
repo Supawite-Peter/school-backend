@@ -45,16 +45,11 @@ class CreateClassroomSerializer(serializers.ModelSerializer):
         try:
             return super().create(validated_data)
         except IntegrityError as e:
-            self.throw_unique_error(e)
-
-    def throw_unique_error(self, error):
-        if "UNIQUE constraint" in str(error):
-            raise serializers.ValidationError(
-                {
-                    "message": "Cannot create classroom with same grade and room in the same school"
-                }
+            throw_unique_error(
+                self.Meta.fields,
+                e,
+                "Cannot create classroom with same grade and room in the same school",
             )
-        raise IntegrityError
 
 
 class UpdateClassroomSerializer(serializers.ModelSerializer):
@@ -69,13 +64,19 @@ class UpdateClassroomSerializer(serializers.ModelSerializer):
         try:
             return super().update(instance, validated_data)
         except IntegrityError as e:
-            self.throw_unique_error(e)
-
-    def throw_unique_error(self, error):
-        if "UNIQUE constraint" in str(error):
-            raise serializers.ValidationError(
-                {
-                    "message": "Cannot update classroom with same grade and room in the same school"
-                }
+            throw_unique_error(
+                self.Meta.fields,
+                e,
+                "Cannot update classroom with same grade and room in the same school",
             )
-        raise IntegrityError
+
+
+def throw_unique_error(fields: list[str], error: IntegrityError, message: str):
+    error_string = str(error)
+    if "UNIQUE constraint" in error_string:
+        error_output = {}
+        for field in fields:
+            if field in error_string and field != "id":
+                error_output[field] = [message]
+        raise serializers.ValidationError(error_output)
+    raise IntegrityError
