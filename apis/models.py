@@ -15,8 +15,8 @@ GENDER_CHOICES = (
 
 
 class School(models.Model):
-    name = models.CharField(max_length=100)
-    alias = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
+    alias = models.CharField(max_length=100, unique=True)
     address = models.TextField()
 
     def __str__(self):
