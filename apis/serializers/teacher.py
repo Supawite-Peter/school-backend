@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from apis.models import Teacher, Classroom
+from apis.models import Teacher, Classroom, School
 from .simple import SimpleClassroomSerializer, SimpleSchoolSerializer
 
 
@@ -40,6 +40,11 @@ class CreateTeacherSerializer(serializers.ModelSerializer):
             "classrooms_id",
         ]
 
+    def validate_school_id(self, value):
+        if not School.objects.filter(pk=value).exists():
+            raise serializers.ValidationError("No school with the given ID was found.")
+        return value
+
     def create(self, validated_data):
         with transaction.atomic():
             # Get classroom
@@ -64,10 +69,21 @@ class UpdateTeacherSerializer(CreateTeacherSerializer):
             "classrooms_id",
         ]
 
+    def validate(self, attrs):
+        if "school_id" in attrs:
+            teacher = Teacher.objects.get(pk=self.context["teacher_id"])
+            if teacher.school_id != attrs["school_id"]:
+                if teacher.classrooms.count() > 0:
+                    raise serializers.ValidationError(
+                        {
+                            "school_id": "To update school, teacher must not registered in any classroom."
+                        }
+                    )
+        return super().validate(attrs)
+
     def update(self, instance, validated_data):
         with transaction.atomic():
             # Get classroom
-            print(validated_data)
             classrooms_data = validated_data.pop("classrooms")
             classrooms = instance.classrooms
             # Save first_name, last_name, gender first
