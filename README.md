@@ -13,9 +13,9 @@ A school backend rest api application based on python django rest framework.
 
 ## Planing Features
 
+- :white_check_mark: Unit Test
 - :black_square_button: Env file
 - :black_square_button: Authentication
-- :black_square_button: Test
 - ...
 
 ## Requirements
@@ -49,6 +49,13 @@ $ python manage.py runserver
 ```
 
 The application should be serving on port `8000`. (Default)
+
+## Run Test
+
+```bash
+$ pyenv shell
+$ pytest
+```
 
 ## API
 
