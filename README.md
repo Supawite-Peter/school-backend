@@ -28,13 +28,13 @@ A school backend rest api application based on python django rest framework.
 
     ```bash
     # Using pipenv
-    $ pyenv install
+    $ pipenv install
     ```
 
 2. Migrate sqlite3 database
    
    ```bash
-   $ pyenv shell
+   $ pipenv shell
    $ python manage.py migrate
    ```
    or Use db.sqlite3.example
@@ -44,7 +44,7 @@ A school backend rest api application based on python django rest framework.
 
 ```bash
 # development
-$ pyenv shell
+$ pipenv shell
 $ python manage.py runserver
 ```
 
@@ -53,7 +53,7 @@ The application should be serving on port `8000`. (Default)
 ## Run Test
 
 ```bash
-$ pyenv shell
+$ pipenv shell
 $ pytest
 ```
 
